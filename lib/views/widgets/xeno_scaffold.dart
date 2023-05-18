@@ -4,21 +4,23 @@ import 'package:google_fonts/google_fonts.dart';
 class XenoScaffold extends StatelessWidget {
   String? appBarTitle;
   Widget? body;
-  XenoScaffold({this.appBarTitle, this.body, super.key});
+  bool? resizeToAvoidBottomInset;
+  XenoScaffold({this.appBarTitle, this.body, this.resizeToAvoidBottomInset, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
+          width: double.infinity,
           child: Image.asset(
             'assets/images/background.png',
             fit: BoxFit.fill,
           ),
-          width: double.infinity,
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
+          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           appBar: AppBar(
             centerTitle: true,
             title: Text(
