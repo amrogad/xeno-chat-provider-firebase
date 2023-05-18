@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xeno_chat/views/register_view.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
           ),
           initialRoute: RegisterView.id,
           routes: {
-            RegisterView.id : (c) => const RegisterView(),
+            RegisterView.id: (c) => const RegisterView(),
           },
         );
       },
