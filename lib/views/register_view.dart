@@ -12,12 +12,6 @@ class RegisterView extends StatelessWidget {
   static const String id = 'register-view';
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
 
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailAddressController = TextEditingController();
-  TextEditingController emailConfirmationController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController passwordConfirmationController = TextEditingController();
   RegisterViewModel registerViewModel = RegisterViewModel();
 
   @override
@@ -37,33 +31,33 @@ class RegisterView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 XenoTextField(
-                  controller: firstNameController,
+                  controller: registerViewModel.firstNameController,
                   title: 'First Name',
                   validator: XenoFormValidator().firstNameValidator,
                 ),
                 XenoTextField(
-                  controller: lastNameController,
+                  controller: registerViewModel.lastNameController,
                   title: 'Last Name',
                   validator: XenoFormValidator().lastNameValidator,
                 ),
                 XenoTextField(
-                  controller: emailAddressController,
+                  controller: registerViewModel.emailAddressController,
                   title: 'Email',
                   validator: XenoFormValidator().emailAddressValidator,
                 ),
                 XenoTextField(
-                  controller: emailConfirmationController,
+                  controller: registerViewModel.emailConfirmationController,
                   title: 'Email Confirmation',
                   validator: XenoFormValidator().emailConfirmationValidator,
                 ),
                 XenoTextField(
-                  controller: passwordController,
+                  controller: registerViewModel.passwordController,
                   title: 'Password',
                   validator: XenoFormValidator().passwordValidator,
                   obscureText: true,
                 ),
                 XenoTextField(
-                  controller: passwordConfirmationController,
+                  controller: registerViewModel.passwordConfirmationController,
                   title: 'Password Confirmation',
                   validator: XenoFormValidator().passwordConfirmationValidator,
                   obscureText: true,
@@ -90,7 +84,9 @@ class RegisterView extends StatelessWidget {
   // Validate all text form fields and create an account on firebase with email and password
   Future<void> validateAndCreateAccount() async {
     if (registerFormKey.currentState!.validate()) {
-      registerViewModel.validateAndCreateAccount(email: emailConfirmationController.text, password: passwordConfirmationController.text);
+      registerViewModel.validateAndCreateAccount(
+          email: registerViewModel.emailConfirmationController.text,
+          password: registerViewModel.passwordConfirmationController.text);
     }
   }
 }
