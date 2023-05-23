@@ -4,6 +4,14 @@ import '../constants/firebase_errors.dart';
 import '../views/widgets/xeno_snackbar.dart';
 
 class RegisterViewModel extends ChangeNotifier {
+
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController emailAddressController = TextEditingController();
+  TextEditingController emailConfirmationController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmationController = TextEditingController();
+
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   // Create an account on firebase with email and password
   Future<void> validateAndCreateAccount({required String email, required String password}) async {
