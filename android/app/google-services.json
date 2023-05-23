@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "396534253944",
+    "project_id": "amro-xeno-chat",
+    "storage_bucket": "amro-xeno-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396534253944:android:8d98db9051f95d9717208d",
+        "android_client_info": {
+          "package_name": "com.amro.xenochat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "396534253944-deq4kemd1gvinpggdv1pcrt03jkn17fb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDngAYwo2Gg5rWDilmri7Btl_pisrRarIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "396534253944-deq4kemd1gvinpggdv1pcrt03jkn17fb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
