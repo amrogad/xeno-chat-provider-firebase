@@ -1,4 +1,4 @@
-package com.example.xeno_chat
+package com.amro.xenochat
 
 import io.flutter.embedding.android.FlutterActivity
 
