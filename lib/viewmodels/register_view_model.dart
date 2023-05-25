@@ -18,33 +18,33 @@ class RegisterViewModel extends ChangeNotifier {
   // Create an account on firebase with email and password
   Future<void> validateAndCreateAccount(BuildContext context) async {
     try {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return const Center(
-                child: CircularProgressIndicator(
-              color: XenoColors.primaryColor,
-            ));
-          });
       if (registerFormKey.currentState!.validate()) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const Center(
+                  child: CircularProgressIndicator(
+                    color: XenoColors.primaryColor,
+                  ));
+            });
         await firebaseAuth.createUserWithEmailAndPassword(email: emailConfirmationController.text, password: passwordConfirmationController.text);
+        final snackBar = SnackBar(
+          elevation: 0,
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          content: AwesomeSnackbarContent(
+            title: 'Success',
+            message: 'Your account has been created successfully!',
+            contentType: ContentType.success,
+          ),
+        );
+        if (context.mounted) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(snackBar);
+        }
+        if (context.mounted) Navigator.of(context).pop();
       }
-      final snackBar = SnackBar(
-        elevation: 0,
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.transparent,
-        content: AwesomeSnackbarContent(
-          title: 'Success',
-          message: 'Your account has been created successfully!',
-          contentType: ContentType.success,
-        ),
-      );
-      if (context.mounted) {
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
-      }
-      if (context.mounted) Navigator.of(context).pop();
     } on FirebaseAuthException catch (error) {
       if (error.code == FirebaseErrors.weakPassword) {
         final snackBar = SnackBar(
