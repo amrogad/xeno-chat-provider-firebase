@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 
 class XenoTextField extends StatelessWidget {
-  String? title;
-  String? Function(String?)? validator;
-  String? value;
-  bool obscureText;
-  TextEditingController controller;
-  XenoTextField({this.title,
-    required this.controller,
-    required this.validator,
-    this.obscureText = false,
-    super.key});
+  final String? title;
+  final String? Function(String?)? validator;
+  final bool obscureText;
+  final TextEditingController controller;
+  const XenoTextField({this.title, required this.controller, required this.validator, this.obscureText = false, super.key});
 
   @override
   Widget build(BuildContext context) {
