@@ -22,15 +22,21 @@ class RegisterViewModel extends ChangeNotifier {
       if (registerFormKey.currentState!.validate()) {
         await firebaseAuth.createUserWithEmailAndPassword(email: emailConfirmationController.text, password: passwordConfirmationController.text);
       }
-      if (context.mounted) Navigator.pop(context);
-      if (context.mounted) XenoSnackBars.showXenoSuccessSnackBar(context, title: 'Success!', message: 'Your account has been created!');
+      if (context.mounted) {
+        Navigator.pop(context);
+        XenoSnackBars.showXenoSuccessSnackBar(context, title: 'Success!', message: 'Your account has been created!');
+      }
     } on FirebaseAuthException catch (error) {
       if (error.code == FirebaseErrors.weakPassword) {
-        if (context.mounted) Navigator.pop(context);
-        if (context.mounted) XenoSnackBars.showXenoErrorSnackBar(context, title: 'Error!', message: 'Your password is too weak!');
+        if (context.mounted) {
+          Navigator.pop(context);
+          XenoSnackBars.showXenoErrorSnackBar(context, title: 'Error!', message: 'Your password is too weak!');
+        }
       } else if (error.code == FirebaseErrors.emailInUse) {
-        if (context.mounted) Navigator.pop(context);
-        if (context.mounted) XenoSnackBars.showXenoErrorSnackBar(context, title: 'Error!', message: 'That email is already in use!');
+        if (context.mounted) {
+          Navigator.pop(context);
+          XenoSnackBars.showXenoErrorSnackBar(context, title: 'Error!', message: 'That email is already in use!');
+        }
       }
     } catch (error) {
       if (kDebugMode) {
