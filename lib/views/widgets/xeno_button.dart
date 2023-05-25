@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:xeno_chat/constants/Colors.dart';
 
 class XenoButton extends StatelessWidget {
-  String? text;
-  XenoButton({this.text, super.key});
+  final String? text;
+  const XenoButton({this.text, super.key});
   @override
   Widget build(BuildContext context) {
     return Container(

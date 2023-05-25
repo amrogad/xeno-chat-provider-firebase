@@ -1,81 +1,36 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:xeno_chat/constants/Colors.dart';
+import 'package:xeno_chat/utilities/app_utilities.dart';
+import 'package:xeno_chat/views/widgets/xeno_snackbar.dart';
 import '../constants/firebase_errors.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailAddressController = TextEditingController();
-  TextEditingController emailConfirmationController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController passwordConfirmationController = TextEditingController();
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailAddressController = TextEditingController();
+  final TextEditingController emailConfirmationController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController passwordConfirmationController = TextEditingController();
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   // Create an account on firebase with email and password
   Future<void> validateAndCreateAccount(BuildContext context) async {
     try {
+      Utilities.showLoader(context);
       if (registerFormKey.currentState!.validate()) {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const Center(
-                  child: CircularProgressIndicator(
-                    color: XenoColors.primaryColor,
-                  ));
-            });
         await firebaseAuth.createUserWithEmailAndPassword(email: emailConfirmationController.text, password: passwordConfirmationController.text);
-        final snackBar = SnackBar(
-          elevation: 0,
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'Success',
-            message: 'Your account has been created successfully!',
-            contentType: ContentType.success,
-          ),
-        );
-        if (context.mounted) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(snackBar);
-        }
-        if (context.mounted) Navigator.of(context).pop();
       }
+      if (context.mounted) Navigator.pop(context);
+      if (context.mounted) XenoSnackBars.showXenoSuccessSnackBar(context, title: 'Success!', message: 'Your account has been created!');
     } on FirebaseAuthException catch (error) {
       if (error.code == FirebaseErrors.weakPassword) {
-        final snackBar = SnackBar(
-          elevation: 0,
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'On Snap!',
-            message: 'The password you used is too weak!',
-            contentType: ContentType.failure,
-          ),
-        );
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
-        if (context.mounted) Navigator.of(context).pop();
+        if (context.mounted) Navigator.pop(context);
+        if (context.mounted) XenoSnackBars.showXenoErrorSnackBar(context, title: 'Error!', message: 'Your password is too weak!');
       } else if (error.code == FirebaseErrors.emailInUse) {
-        final snackBar = SnackBar(
-          elevation: 0,
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'On Snap!',
-            message: 'The email is already in use!',
-            contentType: ContentType.failure,
-          ),
-        );
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
-        if (context.mounted) Navigator.of(context).pop();
+        if (context.mounted) Navigator.pop(context);
+        if (context.mounted) XenoSnackBars.showXenoErrorSnackBar(context, title: 'Error!', message: 'That email is already in use!');
       }
     } catch (error) {
       if (kDebugMode) {
