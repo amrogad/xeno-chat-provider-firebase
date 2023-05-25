@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
 import 'package:xeno_chat/services/xeno_form_validator.dart';
 import 'package:xeno_chat/viewmodels/register_view_model.dart';
@@ -63,7 +64,10 @@ class _RegisterViewState extends State<RegisterView> {
                 XenoTextField(
                   controller: registerViewModel.emailConfirmationController,
                   title: 'Email Confirmation',
-                  validator: XenoFormValidator.emailConfirmationValidator,
+                  validator: (val) => MatchValidator(errorText: 'Emails do not match.').validateMatch(
+                      val!,
+                      registerViewModel.emailAddressController.text
+                  ),
                 ),
                 XenoTextField(
                   controller: registerViewModel.passwordController,
@@ -74,7 +78,10 @@ class _RegisterViewState extends State<RegisterView> {
                 XenoTextField(
                   controller: registerViewModel.passwordConfirmationController,
                   title: 'Password Confirmation',
-                  validator: XenoFormValidator.passwordConfirmationValidator,
+                  validator: (val) => MatchValidator(errorText: 'Passwords do not match.').validateMatch(
+                      val!,
+                      registerViewModel.passwordController.text
+                  ),
                   obscureText: true,
                 ),
                 SizedBox(
