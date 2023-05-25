@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
+      designSize: const Size(375, 812),
       builder: (context, Widget? child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -28,8 +29,14 @@ class MyApp extends StatelessWidget {
           ),
           initialRoute: RegisterView.id,
           routes: {
-            RegisterView.id: (c) => RegisterView(),
+            RegisterView.id: (c) => const RegisterView(),
           },
+            // App font sizes can only be 3x bigger to reduce chances of overflow
+            builder: (context, child) {
+              final mediaQueryData = MediaQuery.of(context);
+              final scale = mediaQueryData.textScaleFactor.clamp(1.0, 1.3);
+              return MediaQuery(data: mediaQueryData.copyWith(textScaleFactor: scale), child: child!);
+            }
         );
       },
     );

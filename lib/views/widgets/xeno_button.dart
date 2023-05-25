@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +12,7 @@ class XenoButton extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 100.w),
       color: XenoColors.primaryColor,
-      child: Text(
+      child: AutoSizeText(
         text ?? '',
         style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
       ),
