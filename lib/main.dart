@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: XenoColors().primaryColor),
+            colorScheme: ColorScheme.fromSeed(seedColor: XenoColors.primaryColor),
             useMaterial3: true,
           ),
           initialRoute: RegisterView.id,

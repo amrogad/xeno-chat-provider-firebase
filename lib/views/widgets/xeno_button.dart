@@ -10,7 +10,7 @@ class XenoButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 100.w),
-      color: XenoColors().primaryColor,
+      color: XenoColors.primaryColor,
       child: Text(
         text ?? '',
         style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
