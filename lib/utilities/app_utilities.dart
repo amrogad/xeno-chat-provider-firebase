@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/Colors.dart';
 
 class Utilities {
-  static void showLoader(BuildContext context) {
+  static void rotatedSpinner(BuildContext context) {
     showDialog(
         context: context,
         builder: (context) {
