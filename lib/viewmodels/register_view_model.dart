@@ -18,9 +18,12 @@ class RegisterViewModel extends ChangeNotifier {
   // Create an account on firebase with email and password
   Future<void> validateAndCreateAccount(BuildContext context) async {
     try {
-      Utilities.showLoader(context);
+      Utilities.rotatedSpinner(context);
       if (registerFormKey.currentState!.validate()) {
-        await firebaseAuth.createUserWithEmailAndPassword(email: emailConfirmationController.text, password: passwordConfirmationController.text);
+        await firebaseAuth.createUserWithEmailAndPassword(
+            email: emailConfirmationController.text,
+            password: passwordConfirmationController.text
+        );
       }
       if (context.mounted) {
         Navigator.pop(context);

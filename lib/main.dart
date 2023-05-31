@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:xeno_chat/constants/Colors.dart';
+import 'package:xeno_chat/views/login_view.dart';
 import 'package:xeno_chat/views/register_view.dart';
 import 'firebase_options.dart';
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
           initialRoute: RegisterView.id,
           routes: {
             RegisterView.id: (c) => const RegisterView(),
+            LoginView.id: (c) => const LoginView(),
           },
             // App font sizes can only be 3x bigger to reduce chances of overflow
             builder: (context, child) {
