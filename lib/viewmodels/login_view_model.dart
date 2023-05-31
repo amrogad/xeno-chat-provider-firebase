@@ -16,15 +16,9 @@ class LoginViewModel extends ChangeNotifier {
     try {
       Utilities.rotatedSpinner(context);
       if (loginFormKey.currentState!.validate()) {
-        await firebaseAuth.signInWithEmailAndPassword(
-            email: emailAddressController.text,
-            password: passwordController.text
-        );
+        await firebaseAuth.signInWithEmailAndPassword(email: emailAddressController.text, password: passwordController.text);
       }
-      // if (context.mounted) {
-      //   Navigator.pop(context);
-      //   XenoSnackBars.showXenoSuccessSnackBar(context, title: 'Success!', message: 'Your account has been created!');
-      // }
+      //TODO: Add navigation to home screen
     } on FirebaseAuthException catch (error) {
       if (error.code == FirebaseErrors.userNotFound) {
         if (context.mounted) {
