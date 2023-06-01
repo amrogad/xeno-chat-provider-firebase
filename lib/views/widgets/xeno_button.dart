@@ -10,11 +10,14 @@ class XenoButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 100.w),
+      width: 150.w,
+      height: 30.h,
       color: XenoColors.primaryColor,
-      child: AutoSizeText(
-        text ?? '',
-        style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
+      child: Center(
+        child: AutoSizeText(
+          text!,
+          style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

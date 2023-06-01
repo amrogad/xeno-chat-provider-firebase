@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: XenoColors.primaryColor),
             useMaterial3: true,
           ),
-          initialRoute: RegisterView.id,
+          initialRoute: LoginView.id,
           routes: {
             RegisterView.id: (c) => const RegisterView(),
             LoginView.id: (c) => const LoginView(),
