@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:xeno_chat/utilities/xeno_form_validator.dart';
 import 'package:xeno_chat/viewmodels/login_view_model.dart';
+import 'package:xeno_chat/views/register_view.dart';
 import 'package:xeno_chat/views/widgets/xeno_button.dart';
 import 'package:xeno_chat/views/widgets/xeno_scaffold.dart';
 import 'package:xeno_chat/views/widgets/xeno_textfield.dart';
@@ -60,6 +61,15 @@ class _LoginViewState extends State<LoginView> {
                   },
                   child: const XenoButton(
                     text: 'Login',
+                  ),
+                ),
+                SizedBox(height: 10.h,),
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pushNamed(context, RegisterView.id);
+                  },
+                  child: const XenoButton(
+                    text: 'Sign up',
                   ),
                 )
               ],

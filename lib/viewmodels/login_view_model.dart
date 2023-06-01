@@ -14,11 +14,14 @@ class LoginViewModel extends ChangeNotifier {
   // Sign in with email and password
   Future<void> validateAndSignIn(BuildContext context) async {
     try {
-      Utilities.rotatedSpinner(context);
+      AppUtilities.rotatedSpinner(context);
       if (loginFormKey.currentState!.validate()) {
         await firebaseAuth.signInWithEmailAndPassword(email: emailAddressController.text, password: passwordController.text);
       }
-      //TODO: Add navigation to home screen
+      if (context.mounted) {
+        Navigator.pop(context);
+        //TODO: Add navigation to home screen
+      }
     } on FirebaseAuthException catch (error) {
       if (error.code == FirebaseErrors.userNotFound) {
         if (context.mounted) {

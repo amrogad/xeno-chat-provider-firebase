@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../constants/Colors.dart';
 
-class Utilities {
-  static void rotatedSpinner(BuildContext context) {
+class AppUtilities {
+  static void rotatedSpinner(BuildContext context, {bool? barrierDismissible}) {
     showDialog(
+      barrierDismissible: barrierDismissible ?? false,
         context: context,
         builder: (context) {
           return const Center(
@@ -12,5 +13,4 @@ class Utilities {
           ));
         });
   }
-
 }

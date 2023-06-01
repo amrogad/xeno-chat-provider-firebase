@@ -12,7 +12,7 @@ class XenoScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           width: double.infinity,
           child: Image.asset(
             'assets/images/background.png',
@@ -24,6 +24,9 @@ class XenoScaffold extends StatelessWidget {
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           appBar: AppBar(
             centerTitle: true,
+            iconTheme: const IconThemeData(
+              color: Colors.white,
+            ),
             title: AutoSizeText(
               appBarTitle ?? '',
               style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),

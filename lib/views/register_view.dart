@@ -23,7 +23,7 @@ class _RegisterViewState extends State<RegisterView> {
   void dispose() {
     registerViewModel.firstNameController.dispose();
     registerViewModel.lastNameController.dispose();
-    registerViewModel.emailAddressController.dispose();
+    registerViewModel.emailController.dispose();
     registerViewModel.emailConfirmationController.dispose();
     registerViewModel.passwordController.dispose();
     registerViewModel.passwordConfirmationController.dispose();
@@ -57,7 +57,7 @@ class _RegisterViewState extends State<RegisterView> {
                   validator: XenoFormValidator.lastNameValidator,
                 ),
                 XenoTextField(
-                  controller: registerViewModel.emailAddressController,
+                  controller: registerViewModel.emailController,
                   title: 'Email',
                   validator: XenoFormValidator.emailAddressValidator,
                 ),
@@ -66,7 +66,7 @@ class _RegisterViewState extends State<RegisterView> {
                   title: 'Email Confirmation',
                   validator: (val) => MatchValidator(errorText: 'Emails do not match.').validateMatch(
                       val!,
-                      registerViewModel.emailAddressController.text
+                      registerViewModel.emailController.text
                   ),
                 ),
                 XenoTextField(
