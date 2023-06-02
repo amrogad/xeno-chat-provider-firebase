@@ -6,7 +6,7 @@ import 'package:xeno_chat/viewmodels/register_view_model.dart';
 import 'package:xeno_chat/views/widgets/xeno_button.dart';
 import 'package:xeno_chat/views/widgets/xeno_scaffold.dart';
 import 'package:xeno_chat/views/widgets/xeno_textfield.dart';
-import '../utilities/xeno_form_validator.dart';
+import '../services/xeno_form_validator.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);

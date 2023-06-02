@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
-import 'package:xeno_chat/utilities/app_utilities.dart';
 import 'package:xeno_chat/views/widgets/xeno_snackbar.dart';
 import '../constants/firebase_errors.dart';
 import '../models/User.dart';
+import '../services/services.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
@@ -20,7 +20,7 @@ class RegisterViewModel extends ChangeNotifier {
   // Create an account on firebase with email and password
   Future<void> validateAndCreateAccount(BuildContext context) async {
     try {
-      AppUtilities.rotatedSpinner(context);
+      Services.rotatedSpinner(context);
       if (registerFormKey.currentState!.validate()) {
         await firebaseAuth.createUserWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text.trim());
         await createFireStoreUser();

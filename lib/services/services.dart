@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants/Colors.dart';
 
-class AppUtilities {
+class Services {
   static void rotatedSpinner(BuildContext context, {bool? barrierDismissible}) {
     showDialog(
       barrierDismissible: barrierDismissible ?? false,
