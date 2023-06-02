@@ -6,13 +6,18 @@ import 'package:xeno_chat/constants/Colors.dart';
 
 class XenoButton extends StatelessWidget {
   final String? text;
-  const XenoButton({this.text, super.key});
+  double? height;
+  double? width;
+  XenoButton({this.text, this.height, this.width, super.key});
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150.w,
-      height: 30.h,
-      color: XenoColors.primaryColor,
+      decoration: BoxDecoration(
+        color: XenoColors.primaryColor,
+        borderRadius: BorderRadius.circular(15.sp),
+      ),
+      height: height ?? 35.h,
+      width: width ?? 130.w,
       child: Center(
         child: AutoSizeText(
           text!,

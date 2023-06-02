@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:xeno_chat/utilities/xeno_form_validator.dart';
 import 'package:xeno_chat/viewmodels/login_view_model.dart';
 import 'package:xeno_chat/views/register_view.dart';
 import 'package:xeno_chat/views/widgets/xeno_button.dart';
 import 'package:xeno_chat/views/widgets/xeno_scaffold.dart';
 import 'package:xeno_chat/views/widgets/xeno_textfield.dart';
+import '../services/xeno_form_validator.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class _LoginViewState extends State<LoginView> {
         loginViewModel;
       },
       child: XenoScaffold(
-        appBarTitle: 'Create Account',
+        appBarTitle: 'Sign In',
         resizeToAvoidBottomInset: false,
         body: Form(
           key: loginViewModel.loginFormKey,
@@ -59,7 +59,7 @@ class _LoginViewState extends State<LoginView> {
                   onTap: () {
                     loginViewModel.validateAndSignIn(context);
                   },
-                  child: const XenoButton(
+                  child: XenoButton(
                     text: 'Login',
                   ),
                 ),
@@ -68,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
                   onTap: (){
                     Navigator.pushNamed(context, RegisterView.id);
                   },
-                  child: const XenoButton(
+                  child: XenoButton(
                     text: 'Sign up',
                   ),
                 )

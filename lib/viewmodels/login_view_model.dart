@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:xeno_chat/utilities/app_utilities.dart';
+import 'package:xeno_chat/services/services.dart';
 import '../constants/firebase_errors.dart';
 import '../views/widgets/xeno_snackbar.dart';
 
@@ -14,7 +14,7 @@ class LoginViewModel extends ChangeNotifier {
   // Sign in with email and password
   Future<void> validateAndSignIn(BuildContext context) async {
     try {
-      AppUtilities.rotatedSpinner(context);
+      Services.rotatedSpinner(context);
       if (loginFormKey.currentState!.validate()) {
         await firebaseAuth.signInWithEmailAndPassword(email: emailAddressController.text, password: passwordController.text);
       }
