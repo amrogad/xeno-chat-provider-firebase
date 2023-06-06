@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:xeno_chat/providers/user_provider.dart';
 import 'package:xeno_chat/widgets/xeno_snackbar.dart';
 import '../constants/firebase_errors.dart';
 import '../models/UserModel.dart';
@@ -16,7 +16,7 @@ class RegisterViewModel extends ChangeNotifier {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController passwordConfirmationController = TextEditingController();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final db = FirebaseFirestore.instance;
+  final UserProvider userProvider = UserProvider();
 
   // Create an account on firebase with email and password
   Future<void> validateAndCreateAccount(BuildContext context) async {
@@ -24,7 +24,12 @@ class RegisterViewModel extends ChangeNotifier {
       Services.rotatedSpinner(context);
       if (registerFormKey.currentState!.validate()) {
         await firebaseAuth.createUserWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text.trim());
-        await createFireStoreUser();
+        final user = UserModel(
+          firstName: firstNameController.text.trim(),
+          lastName: lastNameController.text.trim(),
+          email: emailController.text.trim(),
+        );
+        userProvider.createUserinFireStore(user);
       }
       if (context.mounted) {
         Navigator.pop(context);
@@ -47,15 +52,5 @@ class RegisterViewModel extends ChangeNotifier {
       XenoSnackBars.showXenoErrorSnackBar(context, message: 'An error has occurred please try again later!');
       Navigator.pop(context);
     }
-  }
-
-  // Create a user and add it to FireStore
-  Future<void> createFireStoreUser() async {
-    final user = UserModel(
-      firstName: firstNameController.text.trim(),
-      lastName: lastNameController.text.trim(),
-      email: emailController.text.trim(),
-    );
-    await db.collection('Users').add(user.toJson());
   }
 }

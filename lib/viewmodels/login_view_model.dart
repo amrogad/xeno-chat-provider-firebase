@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:xeno_chat/providers/user_provider.dart';
 import 'package:xeno_chat/services/services.dart';
 import 'package:xeno_chat/views/home_view.dart';
 import '../constants/firebase_errors.dart';
@@ -11,7 +11,7 @@ class LoginViewModel extends ChangeNotifier {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final FirebaseFirestore db = FirebaseFirestore.instance;
+  final UserProvider userProvider = UserProvider();
 
   // Sign in with email and password
   Future<void> validateAndSignIn(BuildContext context) async {
@@ -19,6 +19,7 @@ class LoginViewModel extends ChangeNotifier {
       Services.rotatedSpinner(context);
       if (loginFormKey.currentState!.validate()) {
         await firebaseAuth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+        await userProvider.readUserDataInFireStore(FirebaseAuth.instance.currentUser?.uid ?? '');
       }
       if (context.mounted) {
         Navigator.pop(context);
@@ -28,12 +29,12 @@ class LoginViewModel extends ChangeNotifier {
       if (error.code == FirebaseErrors.userNotFound) {
         if (context.mounted) {
           Navigator.pop(context);
-          XenoSnackBars.showXenoErrorSnackBar(context, title: 'Error!', message: 'No user found for that email!');
+          XenoSnackBars.showXenoErrorSnackBar(context, message: 'No user found for that email!');
         }
       } else if (error.code == FirebaseErrors.wrongPassword) {
         if (context.mounted) {
           Navigator.pop(context);
-          XenoSnackBars.showXenoErrorSnackBar(context, title: 'Error!', message: 'Wrong password provided for that email!');
+          XenoSnackBars.showXenoErrorSnackBar(context, message: 'Wrong password provided for that email!');
         }
       }
     } catch (error) {
