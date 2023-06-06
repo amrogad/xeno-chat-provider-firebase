@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:xeno_chat/views/widgets/xeno_snackbar.dart';
+import 'package:xeno_chat/widgets/xeno_snackbar.dart';
 import '../constants/firebase_errors.dart';
-import '../models/User.dart';
+import '../models/UserModel.dart';
 import '../services/services.dart';
+import '../views/home_view.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
@@ -14,7 +15,7 @@ class RegisterViewModel extends ChangeNotifier {
   final TextEditingController emailConfirmationController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController passwordConfirmationController = TextEditingController();
-  final auth.FirebaseAuth firebaseAuth = auth.FirebaseAuth.instance;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
 
   // Create an account on firebase with email and password
@@ -27,9 +28,10 @@ class RegisterViewModel extends ChangeNotifier {
       }
       if (context.mounted) {
         Navigator.pop(context);
+        Navigator.pushReplacementNamed(context, HomeView.id);
         XenoSnackBars.showXenoSuccessSnackBar(context, message: 'Your account has been created!');
       }
-    } on auth.FirebaseAuthException catch (error) {
+    } on FirebaseAuthException catch (error) {
       if (error.code == FirebaseErrors.weakPassword) {
         if (context.mounted) {
           Navigator.pop(context);
@@ -49,7 +51,7 @@ class RegisterViewModel extends ChangeNotifier {
 
   // Create a user and add it to FireStore
   Future<void> createFireStoreUser() async {
-    final user = User(
+    final user = UserModel(
       firstName: firstNameController.text.trim(),
       lastName: lastNameController.text.trim(),
       email: emailController.text.trim(),

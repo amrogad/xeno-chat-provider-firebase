@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
 import 'package:xeno_chat/viewmodels/register_view_model.dart';
-import 'package:xeno_chat/views/widgets/xeno_button.dart';
-import 'package:xeno_chat/views/widgets/xeno_scaffold.dart';
-import 'package:xeno_chat/views/widgets/xeno_textfield.dart';
+import 'package:xeno_chat/widgets/xeno_button.dart';
+import 'package:xeno_chat/widgets/xeno_scaffold.dart';
+import 'package:xeno_chat/widgets/xeno_textfield.dart';
 import '../services/xeno_form_validator.dart';
 
 class RegisterView extends StatefulWidget {
@@ -38,7 +38,6 @@ class _RegisterViewState extends State<RegisterView> {
       },
       child: XenoScaffold(
         appBarTitle: 'Create Account',
-        resizeToAvoidBottomInset: false,
         body: Form(
           key: registerViewModel.registerFormKey,
           child: Padding(
