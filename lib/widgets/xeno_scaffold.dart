@@ -6,7 +6,7 @@ class XenoScaffold extends StatelessWidget {
   final String? appBarTitle;
   final Widget? body;
   final bool? resizeToAvoidBottomInset;
-  const XenoScaffold({this.appBarTitle, this.body, this.resizeToAvoidBottomInset, super.key});
+  const XenoScaffold({this.appBarTitle, this.body, this.resizeToAvoidBottomInset = false, super.key});
 
   @override
   Widget build(BuildContext context) {

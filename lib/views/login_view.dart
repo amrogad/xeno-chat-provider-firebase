@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:xeno_chat/viewmodels/login_view_model.dart';
 import 'package:xeno_chat/views/register_view.dart';
-import 'package:xeno_chat/views/widgets/xeno_button.dart';
-import 'package:xeno_chat/views/widgets/xeno_scaffold.dart';
-import 'package:xeno_chat/views/widgets/xeno_textfield.dart';
+import 'package:xeno_chat/widgets/xeno_button.dart';
+import 'package:xeno_chat/widgets/xeno_scaffold.dart';
+import 'package:xeno_chat/widgets/xeno_textfield.dart';
 import '../services/xeno_form_validator.dart';
 
 class LoginView extends StatefulWidget {
@@ -21,7 +21,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void dispose() {
-    loginViewModel.emailAddressController.dispose();
+    loginViewModel.emailController.dispose();
     loginViewModel.passwordController.dispose();
     super.dispose();
   }
@@ -34,7 +34,6 @@ class _LoginViewState extends State<LoginView> {
       },
       child: XenoScaffold(
         appBarTitle: 'Sign In',
-        resizeToAvoidBottomInset: false,
         body: Form(
           key: loginViewModel.loginFormKey,
           child: Padding(
@@ -43,7 +42,7 @@ class _LoginViewState extends State<LoginView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 XenoTextField(
-                  controller: loginViewModel.emailAddressController,
+                  controller: loginViewModel.emailController,
                   title: 'Email Address',
                   validator: XenoFormValidator.emailAddressValidator,
                 ),

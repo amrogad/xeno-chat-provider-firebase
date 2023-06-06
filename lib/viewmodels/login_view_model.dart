@@ -1,26 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:xeno_chat/services/services.dart';
+import 'package:xeno_chat/views/home_view.dart';
 import '../constants/firebase_errors.dart';
-import '../views/widgets/xeno_snackbar.dart';
+import '../widgets/xeno_snackbar.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final TextEditingController emailAddressController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final FirebaseFirestore db = FirebaseFirestore.instance;
 
   // Sign in with email and password
   Future<void> validateAndSignIn(BuildContext context) async {
     try {
       Services.rotatedSpinner(context);
       if (loginFormKey.currentState!.validate()) {
-        await firebaseAuth.signInWithEmailAndPassword(email: emailAddressController.text, password: passwordController.text);
+        await firebaseAuth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
       }
       if (context.mounted) {
         Navigator.pop(context);
-        //TODO: Add navigation to home screen
+        Navigator.pushReplacementNamed(context, HomeView.id);
       }
     } on FirebaseAuthException catch (error) {
       if (error.code == FirebaseErrors.userNotFound) {
@@ -35,9 +37,8 @@ class LoginViewModel extends ChangeNotifier {
         }
       }
     } catch (error) {
-      if (kDebugMode) {
-        print(error);
-      }
+      XenoSnackBars.showXenoErrorSnackBar(context, message: 'An error has occurred please try again later!');
+      Navigator.pop(context);
     }
   }
 }
