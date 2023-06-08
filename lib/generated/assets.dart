@@ -3,6 +3,12 @@ class Assets {
   Assets._();
 
   static const String imagesBackground = 'assets/images/background.png';
+  static const String imagesCreateRoom = 'assets/images/create_room.png';
+  static const String imagesLogo = 'assets/images/logo.png';
   static const String imagesSplash = 'assets/images/splash.png';
+  static const String roomsGames = 'assets/images/rooms/games.png';
+  static const String roomsMovies = 'assets/images/rooms/movies.png';
+  static const String roomsMusic = 'assets/images/rooms/music.png';
+  static const String roomsSports = 'assets/images/rooms/sports.png';
 
 }
