@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:xeno_chat/constants/Colors.dart';
+import 'package:xeno_chat/constants/Fonts.dart';
 
 class XenoTextField extends StatelessWidget {
   final String? title;
@@ -10,14 +13,24 @@ class XenoTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: keyboardType,
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: title,
+    return Container(
+      padding: EdgeInsets.all(5.sp),
+      child: TextFormField(
+        keyboardType: keyboardType,
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: title,
+          labelStyle: XenoFonts.bodyTextPrimary(context)?.copyWith(fontSize: 12.sp),
+          border: const OutlineInputBorder(borderSide: BorderSide(color: XenoColors.primaryColor)),
+          focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: XenoColors.primaryColor)),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: XenoColors.primaryColor),
+          ),
+        ),
+        style: XenoFonts.bodyTextPrimary(context),
+        obscureText: obscureText,
+        validator: validator,
       ),
-      obscureText: obscureText,
-      validator: validator,
     );
   }
 }

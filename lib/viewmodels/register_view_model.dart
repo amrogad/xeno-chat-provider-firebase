@@ -24,14 +24,14 @@ class RegisterViewModel extends ChangeNotifier {
       Services.rotatedSpinner(context);
       if (registerFormKey.currentState!.validate()) {
         await firebaseAuth.createUserWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text.trim());
+      }
+      if (context.mounted) {
         final user = UserModel(
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
           email: emailController.text.trim(),
         );
         userProvider.createUserinFireStore(user);
-      }
-      if (context.mounted) {
         Navigator.pop(context);
         Navigator.pushReplacementNamed(context, HomeView.id);
         XenoSnackBars.showXenoSuccessSnackBar(context, message: 'Your account has been created!');

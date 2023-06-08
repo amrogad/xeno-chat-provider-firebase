@@ -18,12 +18,12 @@ class LoginViewModel extends ChangeNotifier {
     try {
       Services.rotatedSpinner(context);
       if (loginFormKey.currentState!.validate()) {
-        await firebaseAuth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
-        await userProvider.readUserDataInFireStore(FirebaseAuth.instance.currentUser?.uid ?? '');
-      }
-      if (context.mounted) {
-        Navigator.pop(context);
-        Navigator.pushReplacementNamed(context, HomeView.id);
+        var logged = await firebaseAuth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+        await userProvider.readUserDataInFireStore(logged.user?.uid ?? '');
+        if (context.mounted) {
+          Navigator.pushReplacementNamed(context, HomeView.id);
+          Navigator.pop(context);
+        }
       }
     } on FirebaseAuthException catch (error) {
       if (error.code == FirebaseErrors.userNotFound) {

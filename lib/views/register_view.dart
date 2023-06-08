@@ -40,62 +40,60 @@ class _RegisterViewState extends State<RegisterView> {
         appBarTitle: 'Create Account',
         body: Form(
           key: registerViewModel.registerFormKey,
-          child: Padding(
-            padding: EdgeInsets.all(10.sp),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                XenoTextField(
-                  controller: registerViewModel.firstNameController,
-                  title: 'First Name',
-                  validator: XenoFormValidator.firstNameValidator,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 140.h,),
+              XenoTextField(
+                controller: registerViewModel.firstNameController,
+                title: 'First Name',
+                validator: XenoFormValidator.firstNameValidator,
+              ),
+              XenoTextField(
+                controller: registerViewModel.lastNameController,
+                title: 'Last Name',
+                validator: XenoFormValidator.lastNameValidator,
+              ),
+              XenoTextField(
+                controller: registerViewModel.emailController,
+                title: 'Email',
+                validator: XenoFormValidator.emailAddressValidator,
+              ),
+              XenoTextField(
+                controller: registerViewModel.emailConfirmationController,
+                title: 'Email Confirmation',
+                validator: (val) => MatchValidator(errorText: 'Emails do not match.').validateMatch(
+                    val!,
+                    registerViewModel.emailController.text
                 ),
-                XenoTextField(
-                  controller: registerViewModel.lastNameController,
-                  title: 'Last Name',
-                  validator: XenoFormValidator.lastNameValidator,
+              ),
+              XenoTextField(
+                controller: registerViewModel.passwordController,
+                title: 'Password',
+                validator: XenoFormValidator.passwordValidator,
+                obscureText: true,
+              ),
+              XenoTextField(
+                controller: registerViewModel.passwordConfirmationController,
+                title: 'Password Confirmation',
+                validator: (val) => MatchValidator(errorText: 'Passwords do not match.').validateMatch(
+                    val!,
+                    registerViewModel.passwordController.text
                 ),
-                XenoTextField(
-                  controller: registerViewModel.emailController,
-                  title: 'Email',
-                  validator: XenoFormValidator.emailAddressValidator,
+                obscureText: true,
+              ),
+              SizedBox(
+                height: 50.h,
+              ),
+              GestureDetector(
+                onTap: () {
+                  registerViewModel.validateAndCreateAccount(context);
+                },
+                child: XenoButton(
+                  text: 'Register',
                 ),
-                XenoTextField(
-                  controller: registerViewModel.emailConfirmationController,
-                  title: 'Email Confirmation',
-                  validator: (val) => MatchValidator(errorText: 'Emails do not match.').validateMatch(
-                      val!,
-                      registerViewModel.emailController.text
-                  ),
-                ),
-                XenoTextField(
-                  controller: registerViewModel.passwordController,
-                  title: 'Password',
-                  validator: XenoFormValidator.passwordValidator,
-                  obscureText: true,
-                ),
-                XenoTextField(
-                  controller: registerViewModel.passwordConfirmationController,
-                  title: 'Password Confirmation',
-                  validator: (val) => MatchValidator(errorText: 'Passwords do not match.').validateMatch(
-                      val!,
-                      registerViewModel.passwordController.text
-                  ),
-                  obscureText: true,
-                ),
-                SizedBox(
-                  height: 50.h,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    registerViewModel.validateAndCreateAccount(context);
-                  },
-                  child: XenoButton(
-                    text: 'Register',
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
         ),
       ),

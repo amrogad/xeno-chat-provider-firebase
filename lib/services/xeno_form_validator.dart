@@ -17,4 +17,12 @@ class XenoFormValidator {
     RequiredValidator(errorText: "Please enter your password."),
     MinLengthValidator(6, errorText: "Please enter at least 6 characters."),
   ]);
+  static final String? Function(String?) roomTitleValidator = MultiValidator([
+    RequiredValidator(errorText: "Please enter a room name."),
+    MinLengthValidator(4, errorText: "Please enter at least 4 characters."),
+  ]);
+  static final String? Function(String?) roomDescValidator = MultiValidator([
+    RequiredValidator(errorText: "Please enter a room description."),
+    MinLengthValidator(10, errorText: "Please enter at least 10 characters."),
+  ]);
 }

@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:xeno_chat/constants/Colors.dart';
 
+import '../constants/Fonts.dart';
+
 class XenoButton extends StatelessWidget {
   final String? text;
   double? height;
@@ -21,7 +23,7 @@ class XenoButton extends StatelessWidget {
       child: Center(
         child: AutoSizeText(
           text!,
-          style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
+          style: XenoFonts.bodyTextWhite(context),
         ),
       ),
     );

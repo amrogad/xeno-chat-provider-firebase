@@ -2,11 +2,15 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../constants/Fonts.dart';
+
 class XenoScaffold extends StatelessWidget {
   final String? appBarTitle;
   final Widget? body;
   final bool? resizeToAvoidBottomInset;
-  const XenoScaffold({this.appBarTitle, this.body, this.resizeToAvoidBottomInset = false, super.key});
+  final bool? centerTitle;
+  final Widget? floatingActionButton;
+  const XenoScaffold({this.appBarTitle, this.body, this.resizeToAvoidBottomInset = false, this.centerTitle = true, this.floatingActionButton, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +27,18 @@ class XenoScaffold extends StatelessWidget {
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           appBar: AppBar(
-            centerTitle: true,
+            centerTitle: centerTitle,
             iconTheme: const IconThemeData(
               color: Colors.white,
             ),
             title: AutoSizeText(
               appBarTitle ?? '',
-              style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
+              style: XenoFonts.bodyTextWhite(context),
             ),
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
+          floatingActionButton: floatingActionButton,
           body: body,
         )
       ],

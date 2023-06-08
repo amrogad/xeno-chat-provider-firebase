@@ -20,12 +20,12 @@ class UserProvider extends ChangeNotifier {
   }
 
   // Reads a user from Firebase Firestore and returns it as a UserModel object.
-   Future<UserModel> readUserDataInFireStore(String userId) async {
+   Future<UserModel?> readUserDataInFireStore(String userId) async {
     var snapshot = await getUserCollection().doc(userId).get();
-    return snapshot.data()!;
+    return snapshot.data();
   }
 
-  // Check if auth user is not null then assign it to user model
+  // Check if auth user is not null then assign it to user variable
   initializeUser() async {
     if (firebaseUser != null) {
       user = await readUserDataInFireStore(firebaseUser?.uid ?? '');
