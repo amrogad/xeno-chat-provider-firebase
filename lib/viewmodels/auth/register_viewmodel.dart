@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:xeno_chat/providers/user_provider.dart';
 import 'package:xeno_chat/widgets/xeno_snackbar.dart';
-import '../constants/firebase_errors.dart';
-import '../models/UserModel.dart';
-import '../services/services.dart';
-import '../views/home_view.dart';
+import '../../constants/firebase_errors.dart';
+import '../../models/UserModel.dart';
+import '../../services/services.dart';
+import '../../views/home/home_view.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   final GlobalKey<FormState> registerFormKey = GlobalKey<FormState>();
@@ -23,15 +23,16 @@ class RegisterViewModel extends ChangeNotifier {
     try {
       Services.rotatedSpinner(context);
       if (registerFormKey.currentState!.validate()) {
-        await firebaseAuth.createUserWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text.trim());
-      }
-      if (context.mounted) {
+        var result = await firebaseAuth.createUserWithEmailAndPassword(email: emailController.text.trim(), password: passwordController.text.trim());
         final user = UserModel(
+          id: result.user?.uid ?? '',
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
           email: emailController.text.trim(),
         );
         userProvider.createUserinFireStore(user);
+      }
+      if (context.mounted) {
         Navigator.pop(context);
         Navigator.pushReplacementNamed(context, HomeView.id);
         XenoSnackBars.showXenoSuccessSnackBar(context, message: 'Your account has been created!');

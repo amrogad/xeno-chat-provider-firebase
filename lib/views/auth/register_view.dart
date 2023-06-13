@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
-import 'package:xeno_chat/viewmodels/register_view_model.dart';
+import 'package:xeno_chat/viewmodels/auth/register_viewmodel.dart';
 import 'package:xeno_chat/widgets/xeno_button.dart';
 import 'package:xeno_chat/widgets/xeno_scaffold.dart';
 import 'package:xeno_chat/widgets/xeno_textfield.dart';
-import '../services/xeno_form_validator.dart';
+import '../../services/xeno_form_validator.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);

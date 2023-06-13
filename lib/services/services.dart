@@ -4,7 +4,7 @@ import '../constants/Colors.dart';
 class Services {
   static void rotatedSpinner(BuildContext context, {bool? barrierDismissible}) {
     showDialog(
-      barrierDismissible: barrierDismissible ?? false,
+        barrierDismissible: barrierDismissible ?? false,
         context: context,
         builder: (context) {
           return const Center(

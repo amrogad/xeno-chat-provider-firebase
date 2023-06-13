@@ -10,7 +10,17 @@ class XenoScaffold extends StatelessWidget {
   final bool? resizeToAvoidBottomInset;
   final bool? centerTitle;
   final Widget? floatingActionButton;
-  const XenoScaffold({this.appBarTitle, this.body, this.resizeToAvoidBottomInset = false, this.centerTitle = true, this.floatingActionButton, super.key});
+  final Widget? leading;
+  final List<Widget>? actions;
+  const XenoScaffold(
+      {this.appBarTitle,
+      this.actions,
+      this.leading,
+      this.body,
+      this.resizeToAvoidBottomInset = false,
+      this.centerTitle = true,
+      this.floatingActionButton,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +37,8 @@ class XenoScaffold extends StatelessWidget {
           backgroundColor: Colors.transparent,
           resizeToAvoidBottomInset: resizeToAvoidBottomInset,
           appBar: AppBar(
+            leading: leading,
+            actions: actions,
             centerTitle: centerTitle,
             iconTheme: const IconThemeData(
               color: Colors.white,

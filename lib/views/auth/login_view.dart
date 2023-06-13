@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:xeno_chat/viewmodels/login_view_model.dart';
-import 'package:xeno_chat/views/register_view.dart';
+import 'package:xeno_chat/viewmodels/auth/login_viewmodel.dart';
+import 'package:xeno_chat/views/auth/register_view.dart';
 import 'package:xeno_chat/widgets/xeno_button.dart';
 import 'package:xeno_chat/widgets/xeno_scaffold.dart';
 import 'package:xeno_chat/widgets/xeno_textfield.dart';
-import '../services/xeno_form_validator.dart';
+import '../../services/xeno_form_validator.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -50,6 +50,7 @@ class _LoginViewState extends State<LoginView> {
                   controller: loginViewModel.passwordController,
                   title: 'Password',
                   validator: XenoFormValidator.passwordValidator,
+                  obscureText: true,
                 ),
                 SizedBox(
                   height: 50.h,
