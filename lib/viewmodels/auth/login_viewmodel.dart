@@ -1,10 +1,11 @@
+import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:xeno_chat/providers/user_provider.dart';
 import 'package:xeno_chat/services/services.dart';
-import 'package:xeno_chat/views/home_view.dart';
-import '../constants/firebase_errors.dart';
-import '../widgets/xeno_snackbar.dart';
+import 'package:xeno_chat/views/home/home_view.dart';
+import '../../constants/firebase_errors.dart';
+import '../../widgets/xeno_snackbar.dart';
 
 class LoginViewModel extends ChangeNotifier {
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
@@ -18,11 +19,12 @@ class LoginViewModel extends ChangeNotifier {
     try {
       Services.rotatedSpinner(context);
       if (loginFormKey.currentState!.validate()) {
-        var logged = await firebaseAuth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
-        await userProvider.readUserDataInFireStore(logged.user?.uid ?? '');
+        UserCredential signedInUser = await firebaseAuth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+        await userProvider.readUserDataInFireStore(signedInUser.user!.uid);
+
         if (context.mounted) {
-          Navigator.pushReplacementNamed(context, HomeView.id);
           Navigator.pop(context);
+          Navigator.pushReplacementNamed(context, HomeView.id);
         }
       }
     } on FirebaseAuthException catch (error) {
@@ -38,6 +40,7 @@ class LoginViewModel extends ChangeNotifier {
         }
       }
     } catch (error) {
+      log('SIGN IN ERROR: $error');
       XenoSnackBars.showXenoErrorSnackBar(context, message: 'An error has occurred please try again later!');
       Navigator.pop(context);
     }

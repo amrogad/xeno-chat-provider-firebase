@@ -5,11 +5,23 @@ import 'package:xeno_chat/constants/Fonts.dart';
 
 class XenoTextField extends StatelessWidget {
   final String? title;
+  final String? hintText;
+  final TextStyle? hintStyle;
   final String? Function(String?)? validator;
   final bool obscureText;
   final TextEditingController controller;
   final TextInputType? keyboardType;
-  const XenoTextField({this.keyboardType, this.title, required this.controller, required this.validator, this.obscureText = false, super.key});
+  final void Function(String)? onChanged;
+  const XenoTextField(
+      {this.keyboardType,
+      this.onChanged,
+      this.hintStyle,
+      this.hintText,
+      this.title,
+      required this.controller,
+      required this.validator,
+      this.obscureText = false,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +30,13 @@ class XenoTextField extends StatelessWidget {
       child: TextFormField(
         keyboardType: keyboardType,
         controller: controller,
+        onChanged: onChanged,
         decoration: InputDecoration(
           labelText: title,
           labelStyle: XenoFonts.bodyTextPrimary(context)?.copyWith(fontSize: 12.sp),
           border: const OutlineInputBorder(borderSide: BorderSide(color: XenoColors.primaryColor)),
+          hintText: hintText,
+          hintStyle: hintStyle,
           focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: XenoColors.primaryColor)),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: XenoColors.primaryColor),

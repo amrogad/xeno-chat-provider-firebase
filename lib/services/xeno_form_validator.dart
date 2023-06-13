@@ -25,4 +25,7 @@ class XenoFormValidator {
     RequiredValidator(errorText: "Please enter a room description."),
     MinLengthValidator(10, errorText: "Please enter at least 10 characters."),
   ]);
+  static final String? Function(String?) messageValidator = MultiValidator([
+    RequiredValidator(errorText: ""),
+  ]);
 }

@@ -11,29 +11,29 @@ class UserProvider extends ChangeNotifier {
     initializeUser();
   }
 
-  // Returns an object that points to the users collection of the user model
-   CollectionReference<UserModel> getUserCollection() {
+  // Returns an object that points to the users collection
+  CollectionReference<UserModel> getUsersCollection() {
     return FirebaseFirestore.instance
-        .collection('users')
+        .collection(UserModel.collectionName)
         // WIth converter converts the data from firestore to UserModel objects and vice versa
         .withConverter(fromFirestore: (snapshot, _) => UserModel.fromJson(snapshot.data()!), toFirestore: (user, _) => user.toJson());
   }
 
   // Reads a user from Firebase Firestore and returns it as a UserModel object.
-   Future<UserModel?> readUserDataInFireStore(String userId) async {
-    var snapshot = await getUserCollection().doc(userId).get();
-    return snapshot.data();
+  Future<UserModel?> readUserDataInFireStore(String userId) async {
+    var userSnapShot = await getUsersCollection().doc(userId).get();
+    return userSnapShot.data();
   }
 
   // Check if auth user is not null then assign it to user variable
-  initializeUser() async {
+  Future<void> initializeUser() async {
     if (firebaseUser != null) {
       user = await readUserDataInFireStore(firebaseUser?.uid ?? '');
     }
   }
 
   // Creates a user with a unique id in Firestore
-   Future<void> createUserinFireStore(UserModel user) {
-    return getUserCollection().doc(user.id).set(user);
+  Future<void> createUserinFireStore(UserModel user) {
+    return getUsersCollection().doc(user.id).set(user);
   }
 }

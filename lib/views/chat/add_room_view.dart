@@ -6,15 +6,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:xeno_chat/constants/Colors.dart';
 import 'package:xeno_chat/services/xeno_form_validator.dart';
-import 'package:xeno_chat/viewmodels/add_room_viewmodel.dart';
+import 'package:xeno_chat/viewmodels/chat/add_room_viewmodel.dart';
 import 'package:xeno_chat/widgets/xeno_button.dart';
 import 'package:xeno_chat/widgets/xeno_scaffold.dart';
 import 'package:xeno_chat/widgets/xeno_textfield.dart';
-import '../constants/Fonts.dart';
-import '../models/CategoryModel.dart';
+import '../../constants/Fonts.dart';
+import '../../models/CategoryModel.dart';
 
 class AddRoomView extends StatefulWidget {
-  AddRoomView({Key? key}) : super(key: key);
+  const AddRoomView({Key? key}) : super(key: key);
   static const id = 'add-room-view';
 
   @override
@@ -87,7 +87,7 @@ class _AddRoomViewState extends State<AddRoomView> {
                                   SizedBox(
                                     width: 12.w,
                                   ),
-                                  Text(category.name.capitalize(), style: XenoFonts.bodyTextPrimary(context)),
+                                  AutoSizeText(category.name.capitalize(), style: XenoFonts.bodyTextPrimary(context)),
                                 ],
                               )))
                           .toList(),
